@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Array Table 4x4</title>
+    </head>
+    <style>
+        span{
+            border: 1px solid #000;
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            margin: 10px;
+        }
+        .marked{
+            background-color: #000;
+        }
+    </style>
+    <body>
+        <h1>Array Table 4x4</h1>
+        <section id="table">
+            <div>
+                <span data-position="00"></span>
+                <span data-position="01"></span>
+                <span data-position="02"></span>
+                <span data-position="03"></span>
+            </div>
+            <div>
+                <span data-position="10"></span>
+                <span data-position="11"></span>
+                <span data-position="12"></span>
+                <span data-position="13"></span>
+            </div>
+            <div>
+                <span data-position="20"></span>
+                <span data-position="21"></span>
+                <span data-position="22"></span>
+                <span data-position="23"></span>
+            </div>
+            <div>
+                <span data-position="30"></span>
+                <span data-position="31"></span>
+                <span data-position="32"></span>
+                <span data-position="33"></span>
+            </div>
+        </section>
+    </body>
+    <script type="text/javascript">
+
+    function Table(id)
+    //pre-condition: an id from an HTML element with children (4x4, div = row, span = column)
+    //description: updates the state of HTML element according parameter ${id} and const ${matrix}
+    {
+
+        const matrix = [
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0]
+        ];
+    
+        const tableHTMLDOM = document.getElementById(id);
+
+        tableHTMLDOM.addEventListener('click', (e)=>{
+
+            const row = e.target.dataset.position[0];
+            const column = e.target.dataset.position[1];
+
+            this.update(row,column);
+            this.render(row,column);
+            
+        })
+
+        this.update = function(row,column){
+            matrix[row][column] = !matrix[row][column];
+            console.log(matrix)
+        }
+
+        this.render = function(row,column){
+            tableHTMLDOM.children[row].children[column].classList.toggle('marked')
+        }
+
+    }
+
+    const table = new Table("table");
+
+    </script>
+</html>
